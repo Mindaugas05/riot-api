@@ -8,7 +8,6 @@ import {filterChampions} from './../app/helper/championFilter'
 import Link from 'next/link'
 import Image from 'next/image'
 import chest from '@/public/chest.png'
-// import token from '@/public/token.png'
 
 
 type SummonerTypes = {
@@ -117,11 +116,3 @@ export default function Table({ data }: any) {
     </div>
   )
 }
-// "championId": 202,
-// "championLevel": 7,
-// "championPoints": 205754,
-// "lastPlayTime": 1681839130000,
-// "championPointsSinceLastLevel": 184154,
-// "championPointsUntilNextLevel": 0,
-// "chestGranted": false,
-// "tokensEarned": 0,

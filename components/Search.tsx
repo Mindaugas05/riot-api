@@ -12,9 +12,7 @@ type OptionTypes = {
 export default function Search() {
     const [region, setRegion] = useState<string>(options[0].value)
     const [nick, setNickname] = useState<string>('')
-    const {data, setData}: any = useDataContext()
-
-    // const id = useId();
+    const {data, setData} = useDataContext()
 
     useEffect(() => {        
     }, [data])
