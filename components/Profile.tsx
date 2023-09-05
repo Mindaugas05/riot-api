@@ -14,18 +14,13 @@ export default function Profile() {
                 data && (
                     <div className="text-left">
                         <Image
-                             alt="Profile image"
-                             src={srcUrl}
-                             width={100}
-                             height={100}                             
+                            alt="Profile image"
+                            src={srcUrl}
+                            width={100}
+                            height={100}
                         />
-                        {/* <div>Id: {data.accountId}</div> */}
-                        {/* <div>AccountId: {data.id}</div> */}
-                        {/* <div>Puuid: {data.puuid}</div> */}
                         <div>Name: {data.name}</div>
-                        {/* <div key={data.id + id}>Profile Icon Id: {data.profileIconId}</div> */}
                         <div>Revision Date: {dateCalculator(data.revisionDate)}</div>
-                        {/* <div>Summoner level: {data.server}</div> */}
                     </div>
                 )
 
