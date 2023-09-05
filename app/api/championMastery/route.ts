@@ -12,7 +12,7 @@ export async function POST(request: Request) {
         const championMastery = await axios.get(
         `https://${data.summoner.server}.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/${data.summoner.id}`, {
           headers: {
-              "X-Riot-Token": "RGAPI-7b942a56-fad8-4a4d-a72e-76712e77d72e"
+              "X-Riot-Token": process.env.RIOT_TOKEN
           }
       }
   );     
