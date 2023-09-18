@@ -4,24 +4,39 @@ import Skeleton from './Skeleton';
 import Token from './Token';
 import axios from 'axios'
 import dateCalculator from '@/app/helper/dateCounter';
-import {filterChampions} from './../app/helper/championFilter'
+import { getChampionByName } from './../app/helper/championFilter'
 import Link from 'next/link'
 import Image from 'next/image'
 import chest from '@/public/chest.png'
 
 
-type SummonerTypes = {
-  id?: string;
-  accountId?: string;
-  puuid?: string;
-  name?: string;
-  profileIconId?: number;
-  revisionDate?: number;
-  summonerLevel?: number;
-  server?: string;
+type PageProps = {
+  data: {
+    id: string;
+    accountId: string;
+    puuid: string;
+    name: string;
+    profileIconId: number;
+    revisionDate: number;
+    summonerLevel: number;
+    server: string;
+  }
 }
 
-export default function Table({ data }: any) {
+type ChampMastery = {
+  championId: number;
+  championLevel: number;
+  championPoints: number;
+  championPointsSinceLastLevel: number;
+  championPointsUntilNextLevel: number;
+  chestGranted: boolean;  
+  lastPlayTime: number;
+  puuid: string;
+  summonerId: string;
+  tokensEarned: number;
+}
+
+export default function Table({ data }: PageProps) {
   const [champMastery, setChampMastery] = useState<any>()
   let countLevel = 0
   let countPoints = 0
@@ -30,8 +45,7 @@ export default function Table({ data }: any) {
     try {
       const response = await axios.post('http://localhost:3000/api/championMastery', {
         summoner: { id: data.id, server: data.server }
-      });
-      console.log(response.data)
+      });      
       setChampMastery(response.data)
     } catch (err) {
       console.log(err)
@@ -39,7 +53,6 @@ export default function Table({ data }: any) {
   }, [data.id, data.server])
 
   useEffect(() => {
-    console.log('useeffect')
     myCallback()
   }, [myCallback])
 
@@ -64,17 +77,17 @@ export default function Table({ data }: any) {
           </tr>
         </thead>
         <tbody className='bg-slate-800'>
-          {champMastery && champMastery.map((val: any, key: number) => {
-            let champion = filterChampions(val.championId)
+          {champMastery && champMastery.map((val: ChampMastery, key: number) => {
+            let champion = getChampionByName(val.championId)
             let link = `/champion/${champion}`
-            let output: string | number = val.championLevel == 7 ? "Mastered": '';
+            let output: string | number = val.championLevel == 7 ? "Mastered" : '';
             countLevel += val.championLevel
             countPoints += val.championPoints
             if (val.championLevel == 7) {
               output = "Mastered"
-            } else if(val.championLevel == 6) {
+            } else if (val.championLevel == 6) {
               output = 3
-            } else if(val.championLevel == 5) {
+            } else if (val.championLevel == 5) {
               output = 2
             } else {
               output = ''
@@ -87,16 +100,16 @@ export default function Table({ data }: any) {
                   <td className='border-b border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400'>{new Intl.NumberFormat().format(val.championPoints)}</td>
                   <td className='border-b border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400'>{dateCalculator(val.lastPlayTime)}</td>
                   <td className='border-b border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400'><Image className={!val.chestGranted ? 'opacity-20' : ''} alt="chest"
-                             src={chest}
-                             width={20}
-                             height={20}  /></td>
+                    src={chest}
+                    width={20}
+                    height={20} /></td>
                   <td className='border-b border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400'>
-                  <>                    
-                    <Token 
-                      level={val.championLevel}
-                      token={val.tokensEarned}
-                      pointsSinceLastLevel={val.championPointsSinceLastLevel}/></>
-                      </td>
+                    <>
+                      <Token
+                        level={val.championLevel}
+                        token={val.tokensEarned}
+                        pointsSinceLastLevel={val.championPointsSinceLastLevel} /></>
+                  </td>
                 </tr>
               </>
             )

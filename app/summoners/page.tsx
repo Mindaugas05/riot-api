@@ -2,6 +2,6 @@ import React from 'react'
 
 export default function Summoner() {
   return (
-    <div>Summoner</div>
+    <div>Summoner feature</div>
   )
 }

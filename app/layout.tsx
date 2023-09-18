@@ -4,7 +4,10 @@ import { Inter } from 'next/font/google'
 import Header from '../components/Header'
 import DataContextProvider from '../context/dataContext'
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ 
+  subsets: ['latin'],
+  variable: '--font-inter', 
+})
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -18,7 +21,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={`${inter.variable} font-sans bg-main-background bg-no-repeat bg-fixed`}>
         <DataContextProvider>
           <Header />
           {children}

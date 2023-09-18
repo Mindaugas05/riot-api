@@ -25,7 +25,7 @@ export default function ProgressBar({level, pointsSinceLastLevel}: PageProps) {
         barPercentage = (pointsSinceLastLevel / 1800) * 100
     } else if (level == 2) {
         barPercentage = (pointsSinceLastLevel / 4200) * 100
-    } else if(level == 3) {
+    } else if (level == 3) {
         barPercentage = (pointsSinceLastLevel / 6600) * 100
     } else if (level == 4) {
         barPercentage = (pointsSinceLastLevel / 9000) * 100

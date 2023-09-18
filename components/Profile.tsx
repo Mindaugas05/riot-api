@@ -12,15 +12,16 @@ export default function Profile() {
             {
 
                 data && (
-                    <div className="text-left">
+                    <div className="text-left text-slate-200 ">
                         <Image
+                            className='border rounded border-sky-500'
                             alt="Profile image"
                             src={srcUrl}
                             width={100}
                             height={100}
                         />
                         <div>Name: {data.name}</div>
-                        <div>Revision Date: {dateCalculator(data.revisionDate)}</div>
+                        {/* <div>Revision Date: {dateCalculator(data.revisionDate)}</div> */}
                     </div>
                 )
 
